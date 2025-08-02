@@ -1,0 +1,77 @@
+CST8285 Assignment 2 - Task Management Application Summary
+=========================================================
+
+How the Application Works
+========================
+
+This task management application is a complete web system that allows users to register, login, and manage their personal tasks. Here's how each part works:
+
+User Registration Process:
+--------------------------
+1. User visits the registration page and fills out a form with their name, email, and password
+2. JavaScript validates the form in real-time as the user types (no HTML5 validation used)
+3. When submitted, the form sends data to insert_user.php
+4. The server validates the data, checks if the email already exists, and hashes the password
+5. If successful, the user is automatically logged in and redirected to the task dashboard
+6. If there are errors, the user is sent back to the registration page with error messages
+
+User Login Process:
+-------------------
+1. User enters their email and password on the login page
+2. JavaScript validates the form before submission
+3. The login form sends data to login_user.php
+4. The server checks if the email exists and verifies the password hash
+5. If correct, a session is created and the user is redirected to the task dashboard
+6. If incorrect, an error message is shown and the user stays on the login page
+
+Task Management System:
+-----------------------
+1. Once logged in, users see their personal task dashboard
+2. Users can add new tasks with title, description, priority level, and due date
+3. All tasks are stored in the database linked to the user's account
+4. Tasks are displayed in a list with options to delete them
+5. Users can filter tasks by searching keywords, selecting priority levels, or choosing specific dates
+6. The system automatically refreshes the task list when changes are made
+
+Database Structure:
+-------------------
+The application uses two main database tables:
+
+Users Table:
+- Stores user information (id, name, email, password hash, creation date)
+- Each user has a unique ID that links to their tasks
+- Passwords are securely hashed using PHP's built-in password_hash() function
+
+Tasks Table:
+- Stores all task information (id, user_id, title, description, priority, due_date, creation_date)
+- Each task is linked to a user through the user_id foreign key
+- When a user is deleted, all their tasks are automatically deleted (cascade delete)
+
+Security Features:
+------------------
+1. Password Hashing: All passwords are hashed using PHP's secure password_hash() function
+2. SQL Injection Prevention: All database queries use prepared statements
+3. Session Management: Users must be logged in to access the task dashboard
+4. Input Validation: Both client-side (JavaScript) and server-side (PHP) validation
+5. Data Sanitization: All user input is cleaned before being stored or displayed
+
+User Interface:
+---------------
+The application features a modern, responsive design with:
+- Purple-blue gradient backgrounds with animated blob effects
+- Glass morphism cards with blur effects and transparency
+- Responsive layout that works on desktop, tablet, and mobile devices
+- Real-time form validation with custom error messages
+- Smooth animations and hover effects
+- Color-coded priority levels for tasks
+
+Technical Implementation:
+-------------------------
+- Frontend: Pure HTML, CSS, and JavaScript (no frameworks)
+- Backend: Procedural PHP with mysqli for database connections
+- Database: MySQL with proper relationships and constraints
+- Server: Designed to run on XAMPP with Apache and MySQL
+- Validation: Custom JavaScript validation without HTML5 attributes
+- AJAX: Used for dynamic task loading and filtering without page refreshes
+
+This application demonstrates a complete understanding of web development fundamentals, including database design, user authentication, form handling, and modern UI/UX principles. It's built entirely from scratch without relying on any external libraries or frameworks, making it perfect for educational purposes and demonstrating core web programming skills. 

@@ -1,0 +1,112 @@
+CST8285 Assignment 2 - Task Management Application Flow
+======================================================
+
+Step-by-Step Application Flow for System Diagram
+===============================================
+
+1. APPLICATION STARTUP
+   - User opens browser and navigates to http://localhost/task-manager
+   - index.php loads and displays landing page
+   - If user is already logged in (session exists), redirect to tasks.php
+   - If not logged in, show welcome page with login/register buttons
+
+2. USER REGISTRATION FLOW
+   - User clicks "Register" button on landing page
+   - Browser navigates to pages/register.php
+   - Registration form loads with JavaScript validation
+   - User fills out form: name, email, password, confirm password
+   - JavaScript validates form in real-time as user types
+   - When form is submitted, JavaScript performs final validation
+   - If validation passes, form data sent to server/insert_user.php via POST
+   - Server validates data, checks for existing email, hashes password
+   - If successful: create session, redirect to pages/tasks.php
+   - If failed: redirect back to register.php with error message
+
+3. USER LOGIN FLOW
+   - User clicks "Login" button on landing page
+   - Browser navigates to pages/login.php
+   - Login form loads with JavaScript validation
+   - User enters email and password
+   - JavaScript validates form before submission
+   - Form data sent to server/login_user.php via POST
+   - Server checks email exists and verifies password hash
+   - If successful: create session, redirect to pages/tasks.php
+   - If failed: show error message on login page
+
+4. TASK DASHBOARD ACCESS
+   - User arrives at pages/tasks.php
+   - Server checks if user is logged in (session exists)
+   - If not logged in, redirect to pages/login.php
+   - If logged in, display dashboard with user's name
+   - JavaScript automatically calls server/fetch_tasks.php via AJAX
+   - Server returns user's tasks as JSON
+   - JavaScript displays tasks in the dashboard
+
+5. TASK CREATION FLOW
+   - User fills out "Add New Task" form on tasks.php
+   - Form fields: title, description, priority, due date
+   - JavaScript validates form in real-time
+   - When submitted, JavaScript performs final validation
+   - If validation passes, form data sent to server/insert_task.php via POST
+   - Server validates data and inserts task into database
+   - If successful: redirect back to tasks.php with success message
+   - If failed: redirect back with error message
+   - Page refreshes and JavaScript reloads task list
+
+6. TASK DISPLAY AND FILTERING
+   - JavaScript calls server/fetch_tasks.php to get tasks
+   - Server queries database for tasks belonging to current user
+   - Server returns tasks as JSON array
+   - JavaScript displays tasks in formatted list
+   - User can filter tasks using search box, priority dropdown, or date picker
+   - Each filter change triggers new AJAX call to server/fetch_tasks.php
+   - Server applies filters to database query
+   - Updated task list displayed without page refresh
+
+7. TASK DELETION FLOW
+   - User clicks "Delete" button on any task
+   - JavaScript shows confirmation dialog
+   - If confirmed, JavaScript sends task ID to server/delete_task.php via POST
+   - Server verifies task belongs to current user
+   - Server deletes task from database
+   - Server returns success/failure response as JSON
+   - JavaScript reloads task list to show updated data
+
+8. LOGOUT FLOW
+   - User clicks "Logout" button on tasks.php
+   - Browser navigates to server/logout.php
+   - Server destroys session and clears session cookies
+   - Server redirects to pages/login.php
+   - User must login again to access dashboard
+
+9. DATABASE INTERACTIONS
+   - All database operations use prepared statements
+   - server/connect.php establishes database connection
+   - Users table: stores user accounts with hashed passwords
+   - Tasks table: stores tasks linked to users via foreign key
+   - Cascade delete: when user is deleted, all their tasks are deleted
+   - All queries include user_id to ensure data isolation
+
+10. SECURITY CHECKS
+    - Session validation on all protected pages
+    - Password hashing using PHP's password_hash()
+    - SQL injection prevention with prepared statements
+    - Input validation on both client and server side
+    - XSS prevention with htmlspecialchars()
+    - CSRF protection through session validation
+
+11. ERROR HANDLING
+    - Database connection errors logged and handled gracefully
+    - Form validation errors displayed to user
+    - AJAX errors caught and displayed as user-friendly messages
+    - Session timeout handling
+    - Invalid access attempts redirected to login
+
+12. RESPONSIVE DESIGN
+    - CSS Grid and Flexbox for responsive layouts
+    - Mobile-first design approach
+    - Glass morphism effects with backdrop-filter
+    - Animated backgrounds and hover effects
+    - Touch-friendly interface elements
+
+This flow demonstrates a complete web application with proper separation of concerns, security measures, and user experience considerations. Each step can be represented in a system diagram showing the interaction between user, browser, server, and database components. 
