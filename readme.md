@@ -8,7 +8,7 @@ Review & Testing: Favour Adebayo
 
 Course: CST8285 Web Programming
 Institution: Algonquin College
-Semester: [Current Semester]
+
 
 Project Overview:
 -----------------
