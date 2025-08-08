@@ -1,7 +1,7 @@
 <?php
 /**
  * CST8285 Assignment 2 - Database Connection Script
- * Created by: Phil Maxwell-Mgbudem (lead developer), Favour Adebayo (helped review)
+ * Created by: Phil Maxwell-Mgbudem (Backend developer), Favour Adebayo (Frontend Developer)
  * 
  * This script establishes a secure connection to the MySQL database
  * using procedural PHP with mysqli
