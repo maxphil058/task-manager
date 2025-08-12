@@ -39,7 +39,7 @@ if (empty($email)) {
 if (empty($password)) {
     $errors[] = 'Password is required';
 } elseif (strlen($password) < 6) {
-    $errors[] = 'Password must be at least 6 characters long';
+    $errors[] = 'Password must be at least 6 characters in length';
 }
 
 // If there are validation errors, redirect back with errors
